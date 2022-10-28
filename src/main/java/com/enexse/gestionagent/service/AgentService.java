@@ -13,4 +13,5 @@ public interface AgentService {
 
     public Agent updateByName(Agent newAgent, String name);
 
+    public List<Integer> countAgentsByStatus();
 }

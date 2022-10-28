@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,6 +48,20 @@ public class AgentServiceImpl implements AgentService {
                     newAgent.setName(name);
                     return agentRepository.save(newAgent);
                 });
+    }
+
+    @Override
+    public List<Integer> countAgentsByStatus() {
+        List<Integer> counts = new ArrayList<>();
+        Integer active = agentRepository.countAgentsByStatus("active");
+        Integer disconnected = agentRepository.countAgentsByStatus("disconnected");
+        Integer pending = agentRepository.countAgentsByStatus("pending");
+        Integer never_connected = agentRepository.countAgentsByStatus("never_connected");
+        counts.add(active);
+        counts.add(disconnected);
+        counts.add(pending);
+        counts.add(never_connected);
+        return counts;
     }
 
 
