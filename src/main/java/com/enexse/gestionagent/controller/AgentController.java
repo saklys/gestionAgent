@@ -9,16 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value= "/api/v1")
 public class AgentController {
 
     @Autowired
     private AgentService agentService;
-
-    @Autowired
-    private AgentRepository agentRepository;
 
     @PostMapping("/agent")
     public ResponseEntity<Agent> addAgent(@RequestBody Agent agent){
@@ -28,6 +25,11 @@ public class AgentController {
     @GetMapping("/agents")
     public ResponseEntity<List<Agent>> getAllAgents(){
         return new ResponseEntity<>(agentService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/statuscount")
+    public ResponseEntity<List<Integer>> countAgentsByStatus() {
+        return new ResponseEntity<>(agentService.countAgentsByStatus(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

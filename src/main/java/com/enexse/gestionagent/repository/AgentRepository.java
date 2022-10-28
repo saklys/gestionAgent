@@ -9,5 +9,5 @@ public interface AgentRepository extends JpaRepository<Agent,Long> {
     Optional<Agent> findAgentByName(String name);
     void deleteAgentById(Long id);
 
-
+    int countAgentsByStatus(String status);
 }
